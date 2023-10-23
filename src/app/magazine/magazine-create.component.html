@@ -1,0 +1,25 @@
+<h2>Register</h2>
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
+    <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+      <div *ngIf="f.name.errors.required">Username is required</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="releaseDate">Release Date</label>
+    <input type="text" formControlName="releaseDate" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.releaseDate.errors }" />
+    <div *ngIf="submitted && f.releaseDate.errors" class="invalid-feedback">
+      <div *ngIf="f.releaseDate.errors.required">Release Date is required</div>
+    </div>
+  </div>  
+
+  <div class="form-group">
+    <button [disabled]="loading" class="btn btn-primary">
+      <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+      Save
+    </button>
+    <a routerLink="/magazine" class="btn btn-link">Cancel</a>
+  </div>
+</form>

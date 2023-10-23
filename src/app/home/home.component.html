@@ -1,0 +1,45 @@
+<h1>Welcome {{currentUser.role}} / {{currentUser.userName}}!</h1>
+<p>You're logged in</p>
+<h3>All registered users:</h3>
+
+<div *ngIf="isTeacher">
+  <ul class="applicationUsers">
+    <li *ngFor="let applicationUser of applicationUsers">
+      <span class="name" style="font-size:x-large">{{applicationUser.userName}}</span>
+      &nbsp;&nbsp;
+      <button [class.selected]="applicationUser === selectedApplicationUser" type="button" (click)="onSelect(applicationUser)">
+        more...
+      </button>
+      &nbsp;&nbsp;
+      <button type="button" (click)="Delete(applicationUser.id)" style="border-color:darkred; border-width:4px;">
+        <span class="delete">Delete</span>
+      </button>
+    </li>
+  </ul>
+
+  <div *ngIf="selectedApplicationUser">
+    <h2>{{selectedApplicationUser.userName}} </h2>
+    <h5>(Details)</h5>
+    <div>
+      <label for="applicationUser-name">User name: </label>&nbsp;
+      <input id="applicationUser-name" [(ngModel)]="selectedApplicationUser.userName" placeholder="userName" />
+    </div>
+    <div>
+      <label for="applicationUser-pwd">Pwd: </label> &nbsp;
+      <input id="name" name="name" required minlength="6" [(ngModel)]="selectedApplicationUser.pwd"
+             #name="ngModel" placeholder="pwd" type="password">
+      <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert">
+        <div *ngIf="name.errors?.['required']"> Password is required. </div>
+        <div *ngIf="name.errors?.['minlength']"> Password must be at least 6 characters long. </div>
+      </div>
+    </div>
+    <div>
+      <button type="button" (click)="Update(selectedApplicationUser)">
+        <span class="update">Update</span>
+      </button>
+    </div>
+  </div>
+  <button type="button" (click)="Create()">
+    <span class="new">Create New user</span>
+  </button>
+</div>

@@ -1,0 +1,36 @@
+<h2>Magazines of ( {{userName}} )</h2>
+<ul class="magazines">
+  <li *ngFor="let magazine of magazines">
+    <span class="name" style="font-size:x-large">{{magazine.name}}</span>
+    &nbsp;&nbsp;
+    <button [class.selected]="magazine === selectedMagazine" type="button" (click)="onSelect(magazine)">
+      more...
+    </button>
+    &nbsp;&nbsp;
+    <button type="button" (click)="Delete(magazine.id)" style="border-color:darkred; border-width:4px;">
+      <span class="delete">Delete</span>
+    </button>
+  </li>
+</ul>
+
+<div *ngIf="selectedMagazine">
+  <h2>{{selectedMagazine.name}} </h2>
+  <h5>(Details)</h5>
+  <div>
+    <label for="magazine-name">Magazine name: </label>&nbsp;
+    <input id="magazine-name" [(ngModel)]="selectedMagazine.name" placeholder="name" />
+  </div>
+  <div>
+    <label for="magazine-releaseDate">Release Date: </label> &nbsp;
+    <input id="magazine-releaseDate" [(ngModel)]="selectedMagazine.releaseDate" placeholder="releaseDate" />
+  </div>
+  <div>
+    <button type="button" (click)="Update(selectedMagazine)">
+      <span class="update">Update</span>
+    </button>
+  </div>
+</div>
+
+<button type="button" (click)="Create()">
+  <span class="new">Create New Magazine</span>
+</button>

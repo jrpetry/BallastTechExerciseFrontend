@@ -1,0 +1,19 @@
+<h2>Application Users</h2>
+<ul class="application-user">
+  <li *ngFor="let applicationUser of applicationUsers">
+    <button [class.selected]="applicationUser === selectedApplicationUser" type="button" (click)="onSelect(applicationUser)">
+      <span class="name">{{applicationUser.userName}}</span>
+      &nbsp;
+      <span class="role">({{applicationUser.role}})</span>
+    </button>
+  </li>
+</ul>
+
+<div *ngIf="selectedApplicationUser">
+  <h2>{{selectedApplicationUser.userName | uppercase}} Details</h2>
+  <div>id: {{selectedApplicationUser.id}}</div>
+  <div>
+    <label for="applicationUser-name">User name: </label>
+    <input id="applicationUser-name" [(ngModel)]="selectedApplicationUser.userName" placeholder="name">
+  </div>
+</div>
